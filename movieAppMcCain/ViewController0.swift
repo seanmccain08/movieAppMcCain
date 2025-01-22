@@ -35,5 +35,12 @@ class ViewController0: UIViewController, UITableViewDelegate, UITableViewDataSou
         return cell
         
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        AppData.currentMovieIndex = AppData.movies[indexPath.row].value(forKey: "imdbID") as! String
+        self.performSegue(withIdentifier: "anotherMovieSegue", sender: nil)
+        
+    }
 
 }

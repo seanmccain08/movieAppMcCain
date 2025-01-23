@@ -11,7 +11,7 @@ class AppData{
     
     static var movies : [NSDictionary] = []
     static var currentMovieIndex = ""
-    static var favoriteMovies : [NSDictionary] = []
+    static var favoriteMovies : [String] = []
     
 }
 

@@ -13,6 +13,10 @@ class MovieViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
+    @IBOutlet weak var runtimeLabel: UILabel!
+    @IBOutlet weak var RTRating: UILabel!
+    @IBOutlet weak var genreLabel: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +24,21 @@ class MovieViewController: UIViewController {
         let session = URLSession.shared
         
         let movieURL = URL(string: "http://www.omdbapi.com/?apikey=ee0c467f&type=movie&i=\(AppData.currentMovieIndex)")!
+        
+        if(AppData.favoriteMovies.count > 0){
+            
+            for i in 0...AppData.favoriteMovies.count-1{
+                
+                if AppData.favoriteMovies[i] == AppData.currentMovieIndex{
+                    
+                    favoriteButton.setImage(UIImage(named: "star.fill"), for: .normal)
+                    break
+                    
+                }
+                
+            }
+            
+        }
         
         let dataTask = session.dataTask(with: movieURL) { data, response, error in
             
@@ -75,7 +94,7 @@ class MovieViewController: UIViewController {
                             }
                             
                         }
-                        if let year = jsonObj.value(forKey: "Year") as? Int{
+                        if let year = jsonObj.value(forKey: "Year"){
                             
                             DispatchQueue.main.async{
                                 
@@ -84,8 +103,46 @@ class MovieViewController: UIViewController {
                             }
                             
                         }
-                        
-                        
+                        if let runtime = jsonObj.value(forKey: "Runtime"){
+                            
+                            DispatchQueue.main.async{
+                                
+                                self.runtimeLabel.text = "\(runtime)"
+                                
+                            }
+                            
+                        }
+                        if let runtime = jsonObj.value(forKey: "Runtime"){
+                            
+                            DispatchQueue.main.async{
+                                
+                                self.runtimeLabel.text = "\(runtime)"
+                                
+                            }
+                            
+                        }
+                        if let genre = jsonObj.value(forKey: "Genre"){
+                            
+                            DispatchQueue.main.async{
+                                
+                                self.genreLabel.text = "\(genre)"
+                                
+                            }
+                            
+                        }
+                        if let ratings = jsonObj.value(forKey: "Ratings") as? [NSDictionary]{
+                            
+                            if let rt = ratings[1].value(forKey: "Value"){
+                                
+                                DispatchQueue.main.async{
+                                    
+                                    self.RTRating.text = "\(rt)"
+                                    
+                                }
+                                
+                            }
+                            
+                        }
                         
                     }
                     
@@ -98,5 +155,10 @@ class MovieViewController: UIViewController {
         dataTask.resume()
     }
     
-
+    @IBAction func favoriteButtonAction(_ sender: Any) {
+        
+        favoriteButton.setImage(UIImage(named: "star.fill"), for: .normal)
+        
+    }
+    
 }

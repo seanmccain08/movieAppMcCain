@@ -26,6 +26,9 @@ class ViewController: UIViewController {
 
     @IBAction func searchButton(_ sender: Any) {
         
+        
+        
+        
         let title = searchField.text
         
         let session = URLSession.shared
@@ -36,6 +39,10 @@ class ViewController: UIViewController {
             
             if let e = error{
                 
+                let alert = UIAlertController(title: "Error", message: "\(e)", preferredStyle: .alert)
+                let dismissAction = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+                alert.addAction(dismissAction)
+                self.present(alert, animated: true, completion: nil)
                 print("Error: \(e)")
          
             }
@@ -53,7 +60,11 @@ class ViewController: UIViewController {
                             
                             DispatchQueue.main.async{
                                 
-//Error Message implementation
+                                let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+                                let dismissAction = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+                                alert.addAction(dismissAction)
+                                self.present(alert, animated: true, completion: nil)
+                                print("Error: \(error)")
                                 
                             }
                             

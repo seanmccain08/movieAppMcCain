@@ -18,23 +18,31 @@ class MovieViewController: UIViewController {
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
     
+    
+    var id0 = ""
+    var plot0 = ""
+    var title0 = ""
+    var rated0 = ""
+    var year0 = ""
+    var runtime0 = ""
+    var genre0 = ""
+    var ratings0 = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let session = URLSession.shared
         
-        let movieURL = URL(string: "http://www.omdbapi.com/?apikey=ee0c467f&type=movie&i=\(AppData.currentMovieIndex)")!
+        print(AppData.currentMovieIndex)
         
-        if(AppData.favoriteMovies.count > 0){
+        let movieURL = URL(string: "http://www.omdbapi.com/?apikey=ee0c467f&type=movie&i=\(AppData.currentMovieIndex)")!
+
+        for movie in AppData.favoriteMovies{
             
-            for i in 0...AppData.favoriteMovies.count-1{
+            if movie.id == AppData.currentMovieIndex{
                 
-                if AppData.favoriteMovies[i] == AppData.currentMovieIndex{
-                    
-                    favoriteButton.setImage(UIImage(named: "star.fill"), for: .normal)
-                    break
-                    
-                }
+                favoriteButton.setImage(UIImage(named: "star.fill"), for: .normal)
+                break
                 
             }
             
@@ -67,11 +75,22 @@ class MovieViewController: UIViewController {
                             
                         }
                         
+                        if let id = jsonObj.value(forKey: "imdbID") as? String{
+                            
+                            DispatchQueue.main.async{
+                                
+                                self.id0 = id
+                                
+                            }
+                            
+                        }
+                        
                         if let title = jsonObj.value(forKey: "Title") as? String{
                             
                             DispatchQueue.main.async{
                                 
                                 self.titleLabel.text = title
+                                self.title0 = title
                                 
                             }
                             
@@ -81,6 +100,7 @@ class MovieViewController: UIViewController {
                             DispatchQueue.main.async{
                                 
                                 self.descriptionLabel.text = plot
+                                self.plot0 = plot
                                 
                             }
                             
@@ -90,6 +110,7 @@ class MovieViewController: UIViewController {
                             DispatchQueue.main.async{
                                 
                                 self.ratingLabel.text = rating
+                                self.rated0 = rating
                                 
                             }
                             
@@ -99,33 +120,27 @@ class MovieViewController: UIViewController {
                             DispatchQueue.main.async{
                                 
                                 self.yearLabel.text = "\(year)"
+                                self.year0 = "\(year)"
                                 
                             }
                             
                         }
-                        if let runtime = jsonObj.value(forKey: "Runtime"){
+                        if let runtime = jsonObj.value(forKey: "Runtime") as? String{
                             
                             DispatchQueue.main.async{
                                 
-                                self.runtimeLabel.text = "\(runtime)"
+                                self.runtimeLabel.text = runtime
+                                self.runtime0 = runtime
                                 
                             }
                             
                         }
-                        if let runtime = jsonObj.value(forKey: "Runtime"){
+                        if let genre = jsonObj.value(forKey: "Genre") as? String{
                             
                             DispatchQueue.main.async{
                                 
-                                self.runtimeLabel.text = "\(runtime)"
-                                
-                            }
-                            
-                        }
-                        if let genre = jsonObj.value(forKey: "Genre"){
-                            
-                            DispatchQueue.main.async{
-                                
-                                self.genreLabel.text = "\(genre)"
+                                self.genreLabel.text = genre
+                                self.genre0 = genre
                                 
                             }
                             
@@ -137,6 +152,7 @@ class MovieViewController: UIViewController {
                                 DispatchQueue.main.async{
                                     
                                     self.RTRating.text = "\(rt)"
+                                    self.ratings0 = "\(rt)"
                                     
                                 }
                                 
@@ -157,7 +173,36 @@ class MovieViewController: UIViewController {
     
     @IBAction func favoriteButtonAction(_ sender: Any) {
         
-        favoriteButton.setImage(UIImage(named: "star.fill"), for: .normal)
+        if(favoriteButton.image(for: .normal) == UIImage(systemName: "star.fill")){
+            
+            favoriteButton.setImage(UIImage(systemName: "star"), for: .normal)
+            if(AppData.favoriteMovies.count > 0){
+                
+                for i in 0...AppData.favoriteMovies.count{
+                    
+                    if(AppData.favoriteMovies[i].id == AppData.currentMovieIndex){
+                        
+                        AppData.favoriteMovies.remove(at: i)
+                        break
+                        
+                    }
+                    
+                }
+                
+            }
+            
+            print("---\(title0) removed from favorites---")
+            
+        }
+        else{
+            
+            favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+            AppData.favoriteMovies.append(Movie(id: id0, title: title0, plot: plot0, rated: rated0, runtime: runtime0, genre: genre0, rottenTomatoes: ratings0, year: year0))
+            
+            print("---\(title0) added to favorites---")
+            
+            
+        }
         
     }
     

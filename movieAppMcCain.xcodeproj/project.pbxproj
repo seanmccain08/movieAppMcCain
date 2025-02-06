@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E7F92EBD2D4D10E600AF90C2 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F92EBC2D4D10E600AF90C2 /* FavoritesViewController.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		E7B346A32D3940490036F5AD /* movieAppMcCain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = movieAppMcCain.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7F92EBC2D4D10E600AF90C2 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -45,6 +50,7 @@
 		E7B3469A2D3940490036F5AD = {
 			isa = PBXGroup;
 			children = (
+				E7F92EBC2D4D10E600AF90C2 /* FavoritesViewController.swift */,
 				E7B346A52D3940490036F5AD /* movieAppMcCain */,
 				E7B346A42D3940490036F5AD /* Products */,
 			);
@@ -132,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7F92EBD2D4D10E600AF90C2 /* FavoritesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

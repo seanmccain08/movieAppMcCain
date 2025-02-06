@@ -11,7 +11,31 @@ class AppData{
     
     static var movies : [NSDictionary] = []
     static var currentMovieIndex = ""
-    static var favoriteMovies : [String] = []
+    static var favoriteMovies : [Movie] = []
+    
+}
+
+class Movie{
+    
+    var id : String
+    var title : String
+    var plot : String
+    var rated : String
+    var runtime : String
+    var genre : String
+    var rottenTomatoes : String
+    var year : String
+    
+    init(id: String, title: String, plot: String, rated: String, runtime: String, genre: String, rottenTomatoes: String, year: String) {
+        self.id = id
+        self.title = title
+        self.plot = plot
+        self.rated = rated
+        self.runtime = runtime
+        self.genre = genre
+        self.rottenTomatoes = rottenTomatoes
+        self.year = year
+    }
     
 }
 

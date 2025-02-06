@@ -14,3 +14,11 @@ class movieCell : UITableViewCell{
     @IBOutlet weak var releaseLabel: UILabel!
     
 }
+
+class movieCell0 : UITableViewCell{
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var releaseLabel: UILabel!
+    
+    
+}
